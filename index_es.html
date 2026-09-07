@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>César Orozco — Automatización de procesos para tu negocio</title>
+<meta name="description" content="Convierto tareas manuales y repetitivas en procesos automáticos. Automatización de reportes, correos y flujos de trabajo con Power Automate, Excel/VBA, Power Query y Power Apps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E2436;
+    --ink-2:#16324a;
+    --teal:#1FB6A6;
+    --teal-deep:#0E8577;
+    --paper:#F5F7F8;
+    --paper-cool:#EAEFF1;
+    --line:#D3DDE1;
+    --text:#243642;
+    --muted:#5C6E78;
+    --white:#ffffff;
+    --amber:#E8A13A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--text);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;line-height:1.08}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .mono{font-family:'Space Grotesk',monospace;font-feature-settings:"tnum"}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,36,54,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:'Space Grotesk';font-weight:700;font-size:1.15rem;color:var(--white);display:flex;align-items:center;gap:10px}
+  .brand .dot{width:9px;height:9px;background:var(--teal);border-radius:50%;box-shadow:0 0 0 4px rgba(31,182,166,.25)}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{color:#B8C7D0;font-size:.92rem;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--white)}
+  .nav-cta{background:var(--teal);color:var(--ink)!important;padding:9px 18px;border-radius:8px;font-weight:600}
+  .nav-cta:hover{background:#28cbb9}
+  .menu-btn{display:none;background:none;border:0;color:#fff;font-size:1.4rem;cursor:pointer}
+
+  /* HERO */
+  .hero{background:var(--ink);color:var(--white);position:relative;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:52px 52px;
+    mask-image:radial-gradient(ellipse 80% 70% at 70% 20%,#000 40%,transparent 80%);
+  }
+  .hero-inner{position:relative;padding:88px 0 96px;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .hero .tag{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:var(--teal);border:1px solid rgba(31,182,166,.35);background:rgba(31,182,166,.08);padding:6px 14px;border-radius:100px;margin-bottom:24px}
+  .hero .who{font-family:'Space Grotesk';color:#8FA6B3;font-size:1rem;font-weight:500;margin-bottom:14px;letter-spacing:.01em}
+  .hero .tag .pulse{width:7px;height:7px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .hero h1{font-size:3.15rem;font-weight:700;margin-bottom:22px}
+  .hero h1 .thin{color:#8FA6B3;font-weight:400}
+  .hero p.lead{font-size:1.12rem;color:#C3D0D8;max-width:34ch;margin-bottom:34px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;padding:14px 24px;border-radius:10px;font-size:1rem;cursor:pointer;transition:transform .15s,background .2s;border:0;font-family:inherit}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--teal);color:var(--ink)}
+  .btn-primary:hover{background:#28cbb9}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+  /* HERO transform panel */
+  .transform{background:linear-gradient(160deg,#16324a,#0c1f30);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:26px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+  .transform h4{font-family:'Space Grotesk';color:#8FA6B3;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px}
+  .tr-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
+  .tr-row:last-child{border-bottom:0}
+  .tr-task{font-size:.95rem;color:#D6E0E6}
+  .tr-times{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:600;white-space:nowrap;flex-shrink:0}
+  .tr-task{max-width:56%}
+  .tr-before{color:#7C8B95;text-decoration:line-through;text-decoration-color:rgba(232,161,58,.7);font-size:.9rem}
+  .tr-arrow{color:var(--teal)}
+  .tr-after{color:var(--teal);font-size:1rem}
+
+  /* SECTION scaffolding */
+  section{padding:82px 0}
+  .sec-head{max-width:60ch;margin-bottom:52px}
+  .eyebrow{display:block;font-family:'Space Grotesk';color:var(--teal-deep);font-weight:600;font-size:.92rem;margin-bottom:12px}
+  h2{font-size:2.2rem;font-weight:700;color:var(--ink);margin-bottom:14px}
+  .sec-head p{font-size:1.08rem;color:var(--muted)}
+
+  /* SERVICES */
+  .services{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .svc{border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--paper);position:relative;transition:border-color .25s,transform .25s}
+  .svc:hover{border-color:var(--teal);transform:translateY(-3px)}
+  .svc .ico{width:46px;height:46px;border-radius:11px;background:var(--ink);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .svc .ico svg{width:24px;height:24px;stroke:var(--teal);fill:none;stroke-width:1.8}
+  .svc h3{font-size:1.22rem;color:var(--ink);margin-bottom:10px;font-weight:600}
+  .svc p{font-size:.97rem;color:var(--muted);margin-bottom:16px}
+  .svc ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .svc li{font-size:.9rem;color:var(--text);display:flex;gap:9px;align-items:flex-start}
+  .svc li::before{content:"";width:6px;height:6px;background:var(--teal);border-radius:50%;margin-top:8px;flex-shrink:0}
+
+  /* WORK / EXAMPLES */
+  .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .case{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .case-top{padding:26px 26px 20px}
+  .case .stack{font-family:'Space Grotesk';font-size:.76rem;font-weight:600;letter-spacing:.04em;color:var(--teal-deep);margin-bottom:12px;text-transform:uppercase}
+  .case h3{font-size:1.18rem;color:var(--ink);margin-bottom:10px;font-weight:600}
+  .case p{font-size:.95rem;color:var(--muted)}
+  .case-metric{margin-top:auto;background:var(--ink);color:#fff;padding:16px 26px;display:flex;align-items:center;justify-content:space-between;font-family:'Space Grotesk'}
+  .case-metric .lbl{font-size:.82rem;color:#8FA6B3}
+  .case-metric .val{font-weight:700;font-size:1.05rem;color:var(--teal);display:flex;align-items:center;gap:9px}
+  .case-metric .val .b{color:#6E8391;text-decoration:line-through;font-weight:500;font-size:.92rem}
+
+  /* disclaimer note */
+  .note{margin-top:32px;background:var(--white);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;padding:22px 26px;display:flex;gap:16px;align-items:flex-start}
+  .note svg{width:22px;height:22px;stroke:var(--teal-deep);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px}
+  .note p{font-size:.97rem;color:var(--text);margin:0}
+  .note strong{color:var(--ink);font-weight:600}
+
+  /* STACK strip */
+  .stack-strip{background:var(--paper-cool);padding:54px 0}
+  .stack-strip .wrap{display:flex;align-items:center;gap:38px;flex-wrap:wrap;justify-content:center}
+  .stack-strip .txt{font-family:'Space Grotesk';color:var(--muted);font-size:.95rem;font-weight:500}
+  .chips{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .chip{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:9px 16px;font-size:.9rem;font-weight:500;color:var(--ink);font-family:'Space Grotesk'}
+
+  /* PROCESS */
+  .process{background:var(--ink);color:#fff}
+  .process h2{color:#fff}
+  .process .eyebrow{color:var(--teal)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:44px}
+  .step{position:relative}
+  .step .n{font-family:'Space Grotesk';font-size:2.4rem;font-weight:700;color:var(--teal);opacity:.9;line-height:1;margin-bottom:14px}
+  .step h3{font-size:1.08rem;color:#fff;margin-bottom:8px;font-weight:600}
+  .step p{font-size:.92rem;color:#A9BBC5}
+
+  /* CONTACT */
+  .contact{background:var(--white);border-top:1px solid var(--line)}
+  .contact-card{background:linear-gradient(160deg,var(--ink),var(--ink-2));border-radius:20px;padding:56px 48px;text-align:center;color:#fff;position:relative;overflow:hidden}
+  .contact-card::after{content:"";position:absolute;width:340px;height:340px;background:radial-gradient(circle,rgba(31,182,166,.22),transparent 70%);top:-120px;right:-80px}
+  .contact-card h2{color:#fff;font-size:2.1rem;margin-bottom:14px;position:relative}
+  .contact-card p{color:#C3D0D8;font-size:1.08rem;max-width:48ch;margin:0 auto 34px;position:relative}
+  .contact-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative}
+  .btn-wa{background:#25D366;color:#0b3d22}
+  .btn-wa:hover{background:#2ee673}
+  .btn-mail{background:var(--white);color:var(--ink)}
+  .btn-mail:hover{background:#e8eef0}
+  .contact-note{margin-top:26px;font-size:.9rem;color:#8FA6B3;position:relative}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:#7E92A0;padding:36px 0;border-top:1px solid rgba(255,255,255,.08)}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  .foot-inner .brand{font-size:1rem}
+  footer .small{font-size:.85rem}
+
+  svg.ic{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:middle}
+
+  /* RESPONSIVE */
+  @media(max-width:860px){
+    .hero-inner{grid-template-columns:1fr;gap:40px;padding:56px 0 64px}
+    .hero h1{font-size:2.4rem}
+    .svc-grid,.work-grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:repeat(2,1fr);gap:30px}
+    .nav-links{display:none}
+    .nav-links.open{display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--ink);padding:18px 28px;gap:18px;border-bottom:1px solid rgba(255,255,255,.1)}
+    .menu-btn{display:block}
+    h2{font-size:1.7rem}
+    .contact-card{padding:40px 24px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span>César Orozco Cuauhtémoc</a>
+    <div class="nav-links" id="navlinks">
+      <a href="#servicios">Servicios</a>
+      <a href="#ejemplos">Ejemplos</a>
+      <a href="#proceso">Cómo trabajo</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Menú">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="tag"><span class="pulse"></span>Disponible para proyectos</span>
+      <h1>Automatizo el trabajo <span class="thin">que te lleva horas.</span></h1>
+      <p class="lead">Convierto tareas manuales y repetitivas —reportes, correos, captura de datos— en procesos que corren solos, para que tú y tu equipo puedan enfocarse en lo que realmente importa.</p>
+      <div class="hero-actions">
+        <a href="#servicios" class="btn btn-primary">Ver lo que hago
+          <svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#ejemplos" class="btn btn-ghost">Ver ejemplos</a>
+      </div>
+    </div>
+    <div class="transform">
+      <h4>Casos reales — antes / después</h4>
+      <div class="tr-row">
+        <span class="tr-task">Creación masiva de tickets en Jira</span>
+        <span class="tr-times"><span class="tr-before">2 hrs</span><span class="tr-arrow">→</span><span class="tr-after">segundos</span></span>
+      </div>
+      <div class="tr-row">
+        <span class="tr-task">Meetings que se autopopulan para casos urgentes</span>
+        <span class="tr-times"><span class="tr-before">15 min</span><span class="tr-arrow">→</span><span class="tr-after">4 min</span></span>
+      </div>
+      <div class="tr-row">
+        <span class="tr-task">Reporte manual en Excel</span>
+        <span class="tr-times"><span class="tr-before">horas</span><span class="tr-arrow">→</span><span class="tr-after">1 clic</span></span>
+      </div>
+      <div class="tr-row">
+        <span class="tr-task">Captura y archivo de datos</span>
+        <span class="tr-times"><span class="tr-before">diario</span><span class="tr-arrow">→</span><span class="tr-after">automático</span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Servicios</span>
+      <h2>Lo que puedo construir para tu operación</h2>
+      <p>Soluciones a la medida sobre las herramientas que ya usas: Microsoft 365, Excel, Outlook. Sin software raro que instalar ni curvas de aprendizaje para tu equipo.</p>
+    </div>
+    <div class="svc-grid">
+
+      <div class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 2 4-6"/></svg></div>
+        <h3>Automatización de reportes</h3>
+        <p>Ese reporte que alguien arma a mano cada semana, convertido en un proceso de un clic.</p>
+        <ul>
+          <li>Consolidación de datos de varias fuentes</li>
+          <li>Plantillas con formato y cálculos listos</li>
+          <li>Documentación para que tu equipo lo pueda usar en minutos</li>
+        </ul>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+        <h3>Bots de correo y documentos</h3>
+        <p>Clasificación, extracción y archivo automático de facturas, órdenes o correos recurrentes.</p>
+        <ul>
+          <li>Flujos que leen, clasifican y guardan solos</li>
+          <li>Notificaciones y alertas configuradas</li>
+          <li>Menos captura manual, menos errores</li>
+        </ul>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>Apps internas a la medida</h3>
+        <p>Interfaces simples para que tu equipo dispare procesos sin tocar código ni hojas frágiles.</p>
+        <ul>
+          <li>Formularios y botones fáciles de usar</li>
+          <li>Conexión a tus sistemas vía APIs</li>
+          <li>Listas para escritorio y móvil</li>
+        </ul>
+      </div>
+
+      <div class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Integración de sistemas</h3>
+        <p>Conecto herramientas que hoy no se hablan entre sí para que la información fluya sola.</p>
+        <ul>
+          <li>Integraciones vía API / REST autenticadas</li>
+          <li>Sincronización entre plataformas</li>
+          <li>Procesos que disparan a otros procesos</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STACK STRIP -->
+<div class="stack-strip">
+  <div class="wrap">
+    <span class="txt">Trabajo con</span>
+    <div class="chips">
+      <span class="chip">Power Automate</span>
+      <span class="chip">Power Apps</span>
+      <span class="chip">Excel / VBA</span>
+      <span class="chip">Power Query</span>
+      <span class="chip">PowerShell</span>
+      <span class="chip">APIs REST</span>
+    </div>
+  </div>
+</div>
+
+<!-- EXAMPLES -->
+<section id="ejemplos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Ejemplos de trabajo</span>
+      <h2>Procesos que ya he automatizado</h2>
+      <p>Casos representativos de lo que construyo. Cada uno reemplazó un proceso manual y repetitivo por uno confiable y rápido.</p>
+    </div>
+    <div class="work-grid">
+
+      <div class="case">
+        <div class="case-top">
+          <div class="stack">Excel · VBA · Outlook</div>
+          <h3>Creador masivo de tickets en Jira</h3>
+          <p>Lee un archivo CSV y crea múltiples tickets de Jira en un solo paso, asignando owners y generando los correos de notificación por Outlook automáticamente.</p>
+        </div>
+        <div class="case-metric"><span class="lbl">Tiempo por lote</span><span class="val"><span class="b">2 hrs</span>→ segundos</span></div>
+      </div>
+
+      <div class="case">
+        <div class="case-top">
+          <div class="stack">Excel · VBA · Outlook</div>
+          <h3>Generador de meetings para casos urgentes</h3>
+          <p>Crea meetings de Teams que se autopopulan con los attendees, genera el link, inserta el disclaimer de confidencialidad y pega la tabla de datos en la invitación, todo desde una hoja.</p>
+        </div>
+        <div class="case-metric"><span class="lbl">Preparación</span><span class="val"><span class="b">15 min</span>→ 4 min</span></div>
+      </div>
+
+      <div class="case">
+        <div class="case-top">
+          <div class="stack">Power Automate · Power Apps</div>
+          <h3>Gestión de tickets vía API REST</h3>
+          <p>Flujo que crea tickets de Jira mediante llamadas HTTP autenticadas a la API REST, con una interfaz de Power Apps para que el equipo lo ejecute sin fricción.</p>
+        </div>
+        <div class="case-metric"><span class="lbl">Proceso</span><span class="val"><span class="b">manual</span>→ automático</span></div>
+      </div>
+
+      <div class="case">
+        <div class="case-top">
+          <div class="stack">Excel · Power Query · VBA</div>
+          <h3>Generador de reportes formales</h3>
+          <p>Extrae datos de listas de SharePoint y genera reportes post-incidente (PIR) con formato en Word, con nombres de archivo estandarizados listos para archivar.</p>
+        </div>
+        <div class="case-metric"><span class="lbl">Elaboración</span><span class="val"><span class="b">horas</span>→ 1 clic</span></div>
+      </div>
+
+    </div>
+    <div class="note">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+      <p><strong>Esta es la experiencia que traigo de base.</strong> Si tu caso requiere integrar otras herramientas o plataformas que no aparecen aquí, no hay problema: platiquémoslo. Mi enfoque es entender tu proceso y encontrar la forma de automatizarlo, no limitarme a una lista cerrada de tecnologías.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="proceso">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Cómo trabajo</span>
+      <h2>Del problema a un proceso que corre solo</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Diagnóstico gratis</h3>
+        <p>Reviso tu proceso actual y te digo con claridad qué se puede automatizar y qué ganarías.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>Cotización cerrada</h3>
+        <p>Precio fijo y alcance claro por adelantado. Sin sorpresas ni costos ocultos.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Implementación</h3>
+        <p>Construyo, pruebo y te dejo la solución funcionando y documentada para tu equipo.</p>
+      </div>
+      <div class="step">
+        <div class="n">4</div>
+        <h3>Soporte</h3>
+        <p>Opción de mantenimiento mensual para ajustes, mejoras y respaldo cuando lo necesites.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="contact" id="contacto">
+  <div class="wrap">
+    <div class="contact-card">
+      <h2>¿Qué proceso te gustaría dejar de hacer a mano?</h2>
+      <p>Si tienes una tarea repetitiva que te está quitando tiempo, seguramente se puede automatizar. Cuéntame tu caso y lo revisamos juntos.</p>
+      <p class="contact-note">Contáctame a través de mi perfil de Fiverr para platicar tu proyecto.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <a href="#top" class="brand"><span class="dot"></span>César Orozco Cuauhtémoc</a>
+    <span class="small">Automatización de procesos · Ciudad de México · © 2026</span>
+  </div>
+</footer>
+
+<script>
+  const btn=document.getElementById('menuBtn'),links=document.getElementById('navlinks');
+  btn.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+</script>
+</body>
+</html>
