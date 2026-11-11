@@ -11,44 +11,44 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#FBF7F0;
-    --cream-2:#F3EBDE;
-    --ink:#3A2E28;
-    --text:#5B4E45;
-    --muted:#8A7B6E;
-    --terra:#C06A4B;
-    --terra-deep:#A5533A;
-    --olive:#7A8450;
-    --olive-deep:#5F6A3C;
-    --gold:#C9A24B;
-    --line:#E4D9C8;
-    --white:#ffffff;
+    --cream:#FBF7F0; --cream-2:#F3EBDE; --ink:#3A2E28; --text:#5B4E45;
+    --muted:#8A7B6E; --terra:#C06A4B; --terra-deep:#A5533A; --olive:#7A8450;
+    --olive-deep:#5F6A3C; --gold:#C9A24B; --line:#E4D9C8; --white:#ffffff;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
-  h1,h2,h3,.display{font-family:'Fraunces',serif;letter-spacing:-.01em;line-height:1.1;font-weight:500}
+  h1,h2,h3{font-family:'Fraunces',serif;letter-spacing:-.01em;line-height:1.1;font-weight:500}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  [data-en]{display:none}
+  html[lang="en"] [data-es]{display:none}
+  html[lang="en"] [data-en]{display:inline}
+  html[lang="en"] li[data-en],html[lang="en"] p[data-en]{display:list-item}
+  html[lang="en"] p[data-en]{display:block}
 
   nav{position:sticky;top:0;z-index:50;background:rgba(251,247,240,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
   .brand{font-family:'Fraunces',serif;font-weight:600;font-size:1.18rem;color:var(--ink);display:flex;align-items:center;gap:10px}
   .brand .dot{width:9px;height:9px;background:var(--terra);border-radius:50%}
-  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-right{display:flex;align-items:center;gap:26px}
+  .nav-links{display:flex;gap:26px;align-items:center}
   .nav-links a{color:var(--text);font-size:.92rem;font-weight:500;transition:color .2s}
   .nav-links a:hover{color:var(--terra)}
   .nav-cta{background:var(--terra);color:var(--white)!important;padding:9px 18px;border-radius:8px;font-weight:600}
   .nav-cta:hover{background:var(--terra-deep)}
+  .lang-toggle{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;font-family:'Inter';font-size:.82rem;font-weight:600}
+  .lang-toggle button{background:transparent;border:0;padding:7px 11px;cursor:pointer;color:var(--muted);font-family:inherit;font-weight:600}
+  .lang-toggle button.active{background:var(--terra);color:var(--white)}
   .menu-btn{display:none;background:none;border:0;color:var(--ink);font-size:1.4rem;cursor:pointer}
 
   .hero{background:linear-gradient(180deg,var(--cream) 0%,var(--cream-2) 100%);position:relative;overflow:hidden}
-  .hero-inner{position:relative;padding:92px 0 100px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .hero-inner{padding:92px 0 100px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
   .hero .tag{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:var(--olive-deep);border:1px solid var(--olive);background:rgba(122,132,80,.08);padding:6px 14px;border-radius:100px;margin-bottom:24px}
   .hero .tag .pulse{width:7px;height:7px;background:var(--olive);border-radius:50%}
   .hero h1{font-size:3.1rem;color:var(--ink);margin-bottom:22px;font-weight:500}
   .hero h1 .accent{color:var(--terra);font-style:italic}
-  .hero p.lead{font-size:1.1rem;color:var(--text);max-width:36ch;margin-bottom:34px}
+  .hero p.lead{font-size:1.1rem;color:var(--text);max-width:40ch;margin-bottom:34px}
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
   .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;padding:14px 24px;border-radius:10px;font-size:1rem;cursor:pointer;transition:transform .15s,background .2s;border:0;font-family:inherit}
   .btn:hover{transform:translateY(-2px)}
@@ -61,14 +61,14 @@
   .transform h4{font-family:'Inter';color:var(--muted);font-size:.76rem;font-weight:600;text-transform:uppercase;letter-spacing:.09em;margin-bottom:20px}
   .tr-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px dashed var(--line)}
   .tr-row:last-child{border-bottom:0}
-  .tr-task{font-size:.95rem;color:var(--text);max-width:56%}
+  .tr-task{font-size:.95rem;color:var(--text);max-width:58%}
   .tr-times{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;white-space:nowrap;flex-shrink:0}
   .tr-before{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--terra);font-size:.9rem}
   .tr-arrow{color:var(--olive)}
   .tr-after{color:var(--olive-deep);font-size:1rem}
 
   section{padding:84px 0}
-  .sec-head{max-width:60ch;margin-bottom:52px}
+  .sec-head{max-width:62ch;margin-bottom:52px}
   .eyebrow{display:block;font-family:'Inter';color:var(--terra);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
   h2{font-size:2.2rem;font-weight:500;color:var(--ink);margin-bottom:14px}
   .sec-head p{font-size:1.08rem;color:var(--muted)}
@@ -102,7 +102,7 @@
   .note strong{color:var(--ink);font-weight:600}
 
   .stack-strip{background:var(--cream-2);padding:54px 0}
-  .stack-strip .wrap{display:flex;align-items:center;gap:38px;flex-wrap:wrap;justify-content:center}
+  .stack-strip .wrap{display:flex;align-items:center;gap:30px;flex-wrap:wrap;justify-content:center}
   .stack-strip .txt{font-family:'Fraunces',serif;color:var(--muted);font-size:.98rem;font-weight:500}
   .chips{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
   .chip{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:9px 16px;font-size:.9rem;font-weight:500;color:var(--ink)}
@@ -116,10 +116,9 @@
   .step p{font-size:.92rem;color:#DCD8C4}
 
   .contact{background:var(--white);border-top:1px solid var(--line)}
-  .contact-card{background:linear-gradient(150deg,var(--cream) 0%,var(--cream-2) 100%);border:1px solid var(--line);border-radius:20px;padding:60px 48px;text-align:center;position:relative;overflow:hidden}
+  .contact-card{background:linear-gradient(150deg,var(--cream) 0%,var(--cream-2) 100%);border:1px solid var(--line);border-radius:20px;padding:60px 48px;text-align:center}
   .contact-card h2{color:var(--ink);font-size:2.1rem;margin-bottom:14px}
-  .contact-card p{color:var(--muted);font-size:1.08rem;max-width:48ch;margin:0 auto 34px}
-  .contact-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .contact-card p{color:var(--muted);font-size:1.08rem;max-width:50ch;margin:0 auto 34px}
   .btn-mail{background:var(--terra);color:var(--white)}
   .btn-mail:hover{background:var(--terra-deep)}
   .contact-note{margin-top:26px;font-size:.9rem;color:var(--muted)}
@@ -149,34 +148,40 @@
 <nav>
   <div class="wrap nav-inner">
     <a href="#top" class="brand"><span class="dot"></span>César Orozco Cuauhtémoc</a>
-    <div class="nav-links" id="navlinks">
-      <a href="#servicios">Servicios</a>
-      <a href="#ejemplos">Ejemplos</a>
-      <a href="#proceso">Cómo trabajo</a>
-      <a href="#contacto" class="nav-cta">Contáctame</a>
+    <div class="nav-right">
+      <div class="nav-links" id="navlinks">
+        <a href="#servicios"><span data-es>Servicios</span><span data-en>Services</span></a>
+        <a href="#ejemplos"><span data-es>Ejemplos</span><span data-en>Examples</span></a>
+        <a href="#proceso"><span data-es>Cómo trabajo</span><span data-en>How I work</span></a>
+        <a href="#contacto" class="nav-cta"><span data-es>Contáctame</span><span data-en>Contact me</span></a>
+      </div>
+      <div class="lang-toggle">
+        <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Menú">☰</button>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Menú">☰</button>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="wrap hero-inner">
     <div>
-      <span class="tag"><span class="pulse"></span>Disponible para proyectos</span>
-      <h1>Automatizo el trabajo <span class="accent">que te lleva horas.</span></h1>
-      <p class="lead">Convierto tareas manuales y repetitivas —reportes, correos, captura de datos— en procesos que corren solos, para que tú y tu equipo puedan enfocarse en lo que realmente importa.</p>
+      <span class="tag"><span class="pulse"></span><span data-es>Disponible para proyectos</span><span data-en>Available for projects</span></span>
+      <h1><span data-es>Automatizo el trabajo <span class="accent">que te lleva horas.</span></span><span data-en>I automate the work <span class="accent">that eats up your hours.</span></span></h1>
+      <p class="lead"><span data-es>Convierto tareas manuales y repetitivas, reportes, correos, captura de datos, en procesos que corren solos, para que tú y tu equipo puedan enfocarse en lo que realmente importa.</span><span data-en>I turn manual, repetitive tasks, reports, emails, data entry, into processes that run on their own, so you and your team can focus on what really matters.</span></p>
       <div class="hero-actions">
-        <a href="#servicios" class="btn btn-primary">Ver lo que hago
+        <a href="#servicios" class="btn btn-primary"><span data-es>Ver lo que hago</span><span data-en>See what I do</span>
           <svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a href="#ejemplos" class="btn btn-ghost">Ver ejemplos</a>
+        <a href="#ejemplos" class="btn btn-ghost"><span data-es>Ver ejemplos</span><span data-en>View examples</span></a>
       </div>
     </div>
     <div class="transform">
-      <h4>Casos reales — antes / después</h4>
-      <div class="tr-row"><span class="tr-task">Creación masiva de tickets en Jira</span><span class="tr-times"><span class="tr-before">2 hrs</span><span class="tr-arrow">→</span><span class="tr-after">segundos</span></span></div>
-      <div class="tr-row"><span class="tr-task">Meetings que se autopopulan para casos urgentes</span><span class="tr-times"><span class="tr-before">15 min</span><span class="tr-arrow">→</span><span class="tr-after">4 min</span></span></div>
-      <div class="tr-row"><span class="tr-task">Reporte manual en Excel</span><span class="tr-times"><span class="tr-before">horas</span><span class="tr-arrow">→</span><span class="tr-after">1 clic</span></span></div>
-      <div class="tr-row"><span class="tr-task">Captura y archivo de datos</span><span class="tr-times"><span class="tr-before">diario</span><span class="tr-arrow">→</span><span class="tr-after">automático</span></span></div>
+      <h4><span data-es>Casos reales — antes / después</span><span data-en>Real cases — before / after</span></h4>
+      <div class="tr-row"><span class="tr-task"><span data-es>Creación masiva de tickets en Jira</span><span data-en>Batch Jira ticket creation</span></span><span class="tr-times"><span class="tr-before">2 hrs</span><span class="tr-arrow">→</span><span class="tr-after"><span data-es>segundos</span><span data-en>seconds</span></span></span></div>
+      <div class="tr-row"><span class="tr-task"><span data-es>Flujo de aprobaciones multi-nivel</span><span data-en>Multi-level approval flow</span></span><span class="tr-times"><span class="tr-before"><span data-es>días</span><span data-en>days</span></span><span class="tr-arrow">→</span><span class="tr-after"><span data-es>automático</span><span data-en>automatic</span></span></span></div>
+      <div class="tr-row"><span class="tr-task"><span data-es>Reporte manual en Excel</span><span data-en>Manual Excel report</span></span><span class="tr-times"><span class="tr-before"><span data-es>horas</span><span data-en>hours</span></span><span class="tr-arrow">→</span><span class="tr-after"><span data-es>1 clic</span><span data-en>1 click</span></span></span></div>
+      <div class="tr-row"><span class="tr-task"><span data-es>Datos crudos en un dashboard vivo</span><span data-en>Raw data into a live dashboard</span></span><span class="tr-times"><span class="tr-before"><span data-es>manual</span><span data-en>manual</span></span><span class="tr-arrow">→</span><span class="tr-after"><span data-es>en vivo</span><span data-en>live</span></span></span></div>
     </div>
   </div>
 </header>
@@ -184,34 +189,50 @@
 <section class="services" id="servicios">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Servicios</span>
-      <h2>Lo que puedo construir para tu operación</h2>
-      <p>Soluciones a la medida sobre las herramientas que ya usas: Microsoft 365, Excel, Outlook. Sin software raro que instalar ni curvas de aprendizaje para tu equipo.</p>
+      <span class="eyebrow"><span data-es>Servicios</span><span data-en>Services</span></span>
+      <h2><span data-es>Lo que puedo construir para tu operación</span><span data-en>What I can build for your operation</span></h2>
+      <p><span data-es>Soluciones a la medida sobre las herramientas que ya usas: Microsoft 365, Excel, Outlook, Power Platform. Sin software raro que instalar ni curvas de aprendizaje para tu equipo.</span><span data-en>Custom solutions on the tools you already use: Microsoft 365, Excel, Outlook, Power Platform. No strange software to install and no learning curve for your team.</span></p>
     </div>
     <div class="svc-grid">
       <div class="svc">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 2 4-6"/></svg></div>
-        <h3>Automatización de reportes</h3>
-        <p>Ese reporte que alguien arma a mano cada semana, convertido en un proceso de un clic.</p>
-        <ul><li>Consolidación de datos de varias fuentes</li><li>Plantillas con formato y cálculos listos</li><li>Documentación para que tu equipo lo use en minutos</li></ul>
+        <h3><span data-es>Automatización de reportes</span><span data-en>Report automation</span></h3>
+        <p><span data-es>Ese reporte que alguien arma a mano cada semana, convertido en un proceso de un clic.</span><span data-en>That report someone builds by hand every week, turned into a one-click process.</span></p>
+        <ul>
+          <li><span data-es>Consolidación de datos de varias fuentes</span><span data-en>Consolidation of data from multiple sources</span></li>
+          <li><span data-es>Plantillas con formato y cálculos listos</span><span data-en>Templates with formatting and calculations ready</span></li>
+          <li><span data-es>Documentación para que tu equipo lo use en minutos</span><span data-en>Documentation so your team can use it in minutes</span></li>
+        </ul>
       </div>
       <div class="svc">
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
-        <h3>Bots de correo y documentos</h3>
-        <p>Clasificación, extracción y archivo automático de facturas, órdenes o correos recurrentes.</p>
-        <ul><li>Flujos que leen, clasifican y guardan solos</li><li>Notificaciones y alertas configuradas</li><li>Menos captura manual, menos errores</li></ul>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3><span data-es>Flujos de aprobación y apps internas</span><span data-en>Approval flows and internal apps</span></h3>
+        <p><span data-es>Apps con flujos de autorización (manager, finanzas, etc.) sobre SharePoint y Power Automate.</span><span data-en>Apps with authorization flows (manager, finance, etc.) on SharePoint and Power Automate.</span></p>
+        <ul>
+          <li><span data-es>Interfaces simples en Power Apps</span><span data-en>Simple Power Apps interfaces</span></li>
+          <li><span data-es>Aprobaciones por niveles con notificaciones</span><span data-en>Multi-level approvals with notifications</span></li>
+          <li><span data-es>Registro y seguimiento en SharePoint</span><span data-en>Logging and tracking in SharePoint</span></li>
+        </ul>
       </div>
       <div class="svc">
-        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
-        <h3>Apps internas a la medida</h3>
-        <p>Interfaces simples para que tu equipo dispare procesos sin tocar código ni hojas frágiles.</p>
-        <ul><li>Formularios y botones fáciles de usar</li><li>Conexión a tus sistemas vía APIs</li><li>Listas para escritorio y móvil</li></ul>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="12" y="7" width="3" height="10"/><rect x="17" y="13" width="3" height="4"/></svg></div>
+        <h3><span data-es>Dashboards e inteligencia de datos</span><span data-en>Dashboards and data intelligence</span></h3>
+        <p><span data-es>Convierto datos crudos en tableros de Power BI que se entienden de un vistazo.</span><span data-en>I turn raw data into Power BI dashboards you grasp at a glance.</span></p>
+        <ul>
+          <li><span data-es>KPIs, SLAs y estadísticas en tiempo real</span><span data-en>Real-time KPIs, SLAs and statistics</span></li>
+          <li><span data-es>Filtros dinámicos y formato condicional</span><span data-en>Dynamic filters and conditional formatting</span></li>
+          <li><span data-es>Datos limpiados con Power Query</span><span data-en>Data cleaned with Power Query</span></li>
+        </ul>
       </div>
       <div class="svc">
         <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-        <h3>Integración de sistemas</h3>
-        <p>Conecto herramientas que hoy no se hablan entre sí para que la información fluya sola.</p>
-        <ul><li>Integraciones vía API / REST autenticadas</li><li>Sincronización entre plataformas</li><li>Procesos que disparan a otros procesos</li></ul>
+        <h3><span data-es>Integración de sistemas</span><span data-en>Systems integration</span></h3>
+        <p><span data-es>Conecto herramientas que hoy no se hablan entre sí para que la información fluya sola.</span><span data-en>I connect tools that don't talk to each other today so information flows on its own.</span></p>
+        <ul>
+          <li><span data-es>Integraciones vía API / REST autenticadas</span><span data-en>Authenticated API / REST integrations</span></li>
+          <li><span data-es>Sincronización entre plataformas</span><span data-en>Syncing across platforms</span></li>
+          <li><span data-es>Procesos que disparan a otros procesos</span><span data-en>Processes that trigger other processes</span></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -219,9 +240,9 @@
 
 <div class="stack-strip">
   <div class="wrap">
-    <span class="txt">Trabajo con</span>
+    <span class="txt"><span data-es>Trabajo con</span><span data-en>I work with</span></span>
     <div class="chips">
-      <span class="chip">Power Automate</span><span class="chip">Power Apps</span><span class="chip">Excel / VBA</span><span class="chip">Power Query</span><span class="chip">PowerShell</span><span class="chip">APIs REST</span>
+      <span class="chip">Power Automate</span><span class="chip">Power Apps</span><span class="chip">Power BI</span><span class="chip">Excel / VBA</span><span class="chip">Power Query</span><span class="chip">PowerShell</span><span class="chip">APIs REST</span>
     </div>
   </div>
 </div>
@@ -229,31 +250,35 @@
 <section id="ejemplos">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Ejemplos de trabajo</span>
-      <h2>Procesos que ya he automatizado</h2>
-      <p>Casos representativos de lo que construyo. Cada uno reemplazó un proceso manual y repetitivo por uno confiable y rápido.</p>
+      <span class="eyebrow"><span data-es>Ejemplos de trabajo</span><span data-en>Work examples</span></span>
+      <h2><span data-es>Procesos que ya he automatizado</span><span data-en>Processes I've already automated</span></h2>
+      <p><span data-es>Casos representativos de lo que construyo. Cada uno reemplazó un proceso manual y repetitivo por uno confiable y rápido.</span><span data-en>Representative cases of what I build. Each one replaced a manual, repetitive process with a reliable, fast one.</span></p>
     </div>
     <div class="work-grid">
       <div class="case">
-        <div class="case-top"><div class="stack">Excel · VBA · Outlook</div><h3>Creador masivo de tickets en Jira</h3><p>Lee un archivo CSV y crea múltiples tickets de Jira en un solo paso, asignando owners y generando los correos de notificación por Outlook automáticamente.</p></div>
-        <div class="case-metric"><span class="lbl">Tiempo por lote</span><span class="val"><span class="b">2 hrs</span>→ segundos</span></div>
+        <div class="case-top"><div class="stack">Power Apps · SharePoint · Power Automate</div><h3><span data-es>App de flujo de aprobaciones</span><span data-en>Approval workflow app</span></h3><p><span data-es>Interfaz donde se levanta una solicitud y pasa por autorización de manager, finanzas y demás niveles, con notificaciones y registro automático.</span><span data-en>An interface where a request is raised and routed through manager, finance and other approval levels, with notifications and automatic logging.</span></p></div>
+        <div class="case-metric"><span class="lbl"><span data-es>Autorización</span><span data-en>Approval</span></span><span class="val"><span class="b"><span data-es>días</span><span data-en>days</span></span>→ <span data-es>automático</span><span data-en>automatic</span></span></div>
       </div>
       <div class="case">
-        <div class="case-top"><div class="stack">Excel · VBA · Outlook</div><h3>Generador de meetings para casos urgentes</h3><p>Crea meetings de Teams que se autopopulan con los attendees, genera el link, inserta el disclaimer de confidencialidad y pega la tabla de datos en la invitación, todo desde una hoja.</p></div>
-        <div class="case-metric"><span class="lbl">Preparación</span><span class="val"><span class="b">15 min</span>→ 4 min</span></div>
+        <div class="case-top"><div class="stack">Power BI · Power Query</div><h3><span data-es>Dashboard interactivo de envíos</span><span data-en>Interactive shipments dashboard</span></h3><p><span data-es>Convierte datos crudos de envíos en información de un vistazo: filtra por transportista o estatus y cada KPI, gráfica y tabla se actualiza al instante. Estadísticas en tiempo real, cumplimiento de SLAs (On-Time %), análisis de tendencias en el tiempo y una matriz de transportistas con semáforo rojo/verde.</span><span data-en>Turns raw shipment data into at-a-glance insight: filter by carrier or status and every KPI, chart and table updates instantly. Real-time statistics, SLA compliance (On-Time %), trend analysis over time and a carrier matrix with red/green traffic-light formatting.</span></p></div>
+        <div class="case-metric"><span class="lbl"><span data-es>Visibilidad</span><span data-en>Visibility</span></span><span class="val"><span class="b"><span data-es>manual</span><span data-en>manual</span></span>→ <span data-es>en vivo</span><span data-en>live</span></span></div>
       </div>
       <div class="case">
-        <div class="case-top"><div class="stack">Power Automate · Power Apps</div><h3>Gestión de tickets vía API REST</h3><p>Flujo que crea tickets de Jira mediante llamadas HTTP autenticadas a la API REST, con una interfaz de Power Apps para que el equipo lo ejecute sin fricción.</p></div>
-        <div class="case-metric"><span class="lbl">Proceso</span><span class="val"><span class="b">manual</span>→ automático</span></div>
+        <div class="case-top"><div class="stack">Excel · VBA · Outlook</div><h3><span data-es>Creador masivo de tickets en Jira</span><span data-en>Batch Jira ticket creator</span></h3><p><span data-es>Lee un archivo CSV y crea múltiples tickets de Jira en un solo paso, asignando owners y generando los correos de notificación por Outlook automáticamente.</span><span data-en>Reads a CSV file and creates Jira tickets in batches in a single pass, assigning owners and generating Outlook notification emails automatically.</span></p></div>
+        <div class="case-metric"><span class="lbl"><span data-es>Tiempo por lote</span><span data-en>Time per batch</span></span><span class="val"><span class="b">2 hrs</span>→ <span data-es>segundos</span><span data-en>seconds</span></span></div>
       </div>
       <div class="case">
-        <div class="case-top"><div class="stack">Excel · Power Query · VBA</div><h3>Generador de reportes formales</h3><p>Extrae datos de listas de SharePoint y genera reportes post-incidente (PIR) con formato en Word, con nombres de archivo estandarizados listos para archivar.</p></div>
-        <div class="case-metric"><span class="lbl">Elaboración</span><span class="val"><span class="b">horas</span>→ 1 clic</span></div>
+        <div class="case-top"><div class="stack">Excel · VBA · Outlook · Teams</div><h3><span data-es>Aplicación de creación automática de Teams meeting</span><span data-en>Rapid incident-response cockpit</span></h3><p><span data-es>Aplicación en Excel para incidentes críticos: desde una sola hoja crea la reunión de Teams con sus asistentes y la tabla del incidente, levanta el ticket de Jira correspondiente y une todo en un solo clic, para arrancar la respuesta en minutos.</span><span data-en>An Excel application for critical incidents: from a single sheet it creates the Teams bridge with its attendees and incident table, opens the matching Jira ticket, and ties it all together in one click, so response starts in minutes.</span></p></div>
+        <div class="case-metric"><span class="lbl"><span data-es>Arranque</span><span data-en>Kick-off</span></span><span class="val"><span class="b">15 min</span>→ 2 min</span></div>
+      </div>
+      <div class="case">
+        <div class="case-top"><div class="stack">Excel · Power Query · VBA</div><h3><span data-es>Generador de reportes formales</span><span data-en>Formal report generator</span></h3><p><span data-es>Extrae datos de listas de SharePoint y genera reportes con formato en Word, con nombres de archivo estandarizados listos para archivar.</span><span data-en>Pulls data from SharePoint lists and generates formatted reports in Word, with standardized file names ready to archive.</span></p></div>
+        <div class="case-metric"><span class="lbl"><span data-es>Elaboración</span><span data-en>Preparation</span></span><span class="val"><span class="b"><span data-es>horas</span><span data-en>hours</span></span>→ <span data-es>1 clic</span><span data-en>1 click</span></span></div>
       </div>
     </div>
     <div class="note">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
-      <p><strong>Esta es la experiencia que traigo de base.</strong> Si tu caso requiere integrar otras herramientas o plataformas que no aparecen aquí, no hay problema: platiquémoslo. Mi enfoque es entender tu proceso y encontrar la forma de automatizarlo, no limitarme a una lista cerrada de tecnologías.</p>
+      <p><span data-es><strong>Esta es la experiencia que traigo de base.</strong> Si tu caso requiere integrar otras herramientas o plataformas que no aparecen aquí, no hay problema: platiquémoslo. Mi enfoque es entender tu proceso y encontrar la forma de automatizarlo, no limitarme a una lista cerrada de tecnologías.</span><span data-en><strong>This is the experience I bring by default.</strong> If your case needs other tools or platforms not listed here, no problem: let's talk it through. My focus is understanding your process and finding a way to automate it, not limiting myself to a fixed list of technologies.</span></p>
     </div>
   </div>
 </section>
@@ -261,14 +286,14 @@
 <section class="process" id="proceso">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Cómo trabajo</span>
-      <h2>Del problema a un proceso que corre solo</h2>
+      <span class="eyebrow"><span data-es>Cómo trabajo</span><span data-en>How I work</span></span>
+      <h2><span data-es>Del problema a un proceso que corre solo</span><span data-en>From the problem to a process that runs itself</span></h2>
     </div>
     <div class="steps">
-      <div class="step"><div class="n">1</div><h3>Diagnóstico gratis</h3><p>Reviso tu proceso actual y te digo con claridad qué se puede automatizar y qué ganarías.</p></div>
-      <div class="step"><div class="n">2</div><h3>Cotización cerrada</h3><p>Precio fijo y alcance claro por adelantado. Sin sorpresas ni costos ocultos.</p></div>
-      <div class="step"><div class="n">3</div><h3>Implementación</h3><p>Construyo, pruebo y te dejo la solución funcionando y documentada para tu equipo.</p></div>
-      <div class="step"><div class="n">4</div><h3>Soporte</h3><p>Opción de mantenimiento mensual para ajustes, mejoras y respaldo cuando lo necesites.</p></div>
+      <div class="step"><div class="n">1</div><h3><span data-es>Diagnóstico gratis</span><span data-en>Free assessment</span></h3><p><span data-es>Reviso tu proceso actual y te digo con claridad qué se puede automatizar y qué ganarías.</span><span data-en>I review your current process and tell you clearly what can be automated and what you'd gain.</span></p></div>
+      <div class="step"><div class="n">2</div><h3><span data-es>Cotización cerrada</span><span data-en>Fixed quote</span></h3><p><span data-es>Precio fijo y alcance claro por adelantado. Sin sorpresas ni costos ocultos.</span><span data-en>Fixed price and clear scope up front. No surprises or hidden costs.</span></p></div>
+      <div class="step"><div class="n">3</div><h3><span data-es>Implementación</span><span data-en>Implementation</span></h3><p><span data-es>Construyo, pruebo y te dejo la solución funcionando y documentada para tu equipo.</span><span data-en>I build, test and hand over the solution working and documented for your team.</span></p></div>
+      <div class="step"><div class="n">4</div><h3><span data-es>Soporte</span><span data-en>Support</span></h3><p><span data-es>Opción de mantenimiento mensual para ajustes, mejoras y respaldo cuando lo necesites.</span><span data-en>Optional monthly maintenance for tweaks, improvements and backup whenever you need it.</span></p></div>
     </div>
   </div>
 </section>
@@ -276,14 +301,14 @@
 <section class="contact" id="contacto">
   <div class="wrap">
     <div class="contact-card">
-      <h2>¿Qué proceso te gustaría dejar de hacer a mano?</h2>
-      <p>Cuéntame qué tarea te está quitando tiempo. El diagnóstico inicial es sin costo y sin compromiso.</p>
-      <div class="contact-actions">
-        <a href="mailto:cesar.cuauhtemoc@gmail.com?subject=Consulta%20de%20automatización" class="btn btn-mail">
+      <h2><span data-es>¿Qué proceso te gustaría dejar de hacer a mano?</span><span data-en>What process would you like to stop doing by hand?</span></h2>
+      <p><span data-es>Cuéntame qué tarea te está quitando tiempo. El diagnóstico inicial es sin costo y sin compromiso.</span><span data-en>Tell me which task is eating up your time. The initial assessment is free and with no commitment.</span></p>
+      <div>
+        <a href="mailto:cesar.cuauhtemoc@gmail.com?subject=Consulta%20de%20automatizacion" class="btn btn-mail">
           <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-          Escríbeme un correo</a>
+          <span data-es>Escríbeme un correo</span><span data-en>Send me an email</span></a>
       </div>
-      <p class="contact-note">Respondo normalmente en menos de 24 horas.</p>
+      <p class="contact-note"><span data-es>Respondo normalmente en menos de 24 horas.</span><span data-en>I usually reply within 24 hours.</span></p>
     </div>
   </div>
 </section>
@@ -291,11 +316,18 @@
 <footer>
   <div class="wrap foot-inner">
     <a href="#top" class="brand"><span class="dot"></span>César Orozco Cuauhtémoc</a>
-    <span class="small">Automatización de procesos · Ciudad de México · © 2026</span>
+    <span class="small"><span data-es>Automatización de procesos · Ciudad de México · © 2026</span><span data-en>Process automation · Mexico City · © 2026</span></span>
   </div>
 </footer>
 
 <script>
+  function setLang(l){
+    document.documentElement.lang=l;
+    document.getElementById('btn-es').classList.toggle('active',l==='es');
+    document.getElementById('btn-en').classList.toggle('active',l==='en');
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  try{var saved=localStorage.getItem('lang');if(saved)setLang(saved);}catch(e){}
   const btn=document.getElementById('menuBtn'),links=document.getElementById('navlinks');
   btn.addEventListener('click',()=>links.classList.toggle('open'));
   links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
